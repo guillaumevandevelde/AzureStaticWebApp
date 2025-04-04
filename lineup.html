@@ -1,0 +1,41 @@
+<script>
+ 
+    (async function getArtists() {
+        let resp = await fetch("api/getartists");
+        let json = await resp.json();
+        let ul=document.querySelector("#artists");
+        json.forEach(element => {
+            let li = document.createElement("li");
+            let p = document.createElement("p");
+            p.textContent = element.name;
+            let img=document.createElement("img");
+            img.src="data:image/png;base64," + element.image;
+ 
+            li.appendChild(p);
+            li.appendChild(img);
+            ul.appendChild(li);
+        });
+    })();   
+    
+    (async function getStages() {
+    let json=await resp.json();
+    let resp = await fetch("api/getstages");
+    let ul = document.querySelector("#stages");
+    json.forEach(element=>{
+        let li=document.createElement("li");
+        li.textContent = element.name;
+        ul.appendChild(li);
+    });
+})();
+ 
+</script>
+
+<section id="artistssection">
+    <p>Will be performing:</p>
+    <ul id="artists"></ul>
+</section>
+
+<section>
+    <p>Stages</p>
+    <ul id="stages"></ul>
+</section>
